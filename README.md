@@ -1,4 +1,5 @@
-===Under construction===
+Under construction
+==================
 
 This is a documentation tool for the enyo framework.
 
