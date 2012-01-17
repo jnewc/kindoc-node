@@ -14,21 +14,23 @@
 **/
 enyo.kind({
 	name: "Arithmetic",
-	
-	// This will be added to the docs auto-magically. No need for comment!
+
+	// @public
 	published: {
 		firstprop: "somedata",
 		secondprop: "moredata"
 	},
 	
 	/**
-		Adds two numbers together
+		Adds the two numbers [first] and [second] together
+		and returns the result.
 	**/
 	addition: function(first, second){
 		return first + second;
 	},
 	/**
-		Divides numerator by denominator
+		Divides [numerator] by [denominator] and returns
+		the result.
 	**/
 	division: function(numerator, denominator){
 		

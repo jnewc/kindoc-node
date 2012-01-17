@@ -134,7 +134,8 @@
 				a
 			;
 			for(a in pubs) {
-				pubshtml += "<p>" + a + ": " + pubs[a] + "</p>\r\n";
+				pubshtml += "<p><span class=\"prop-name\">" + a + "</span>: " + 
+					"<span class=\"prop-value\">" + pubs[a] + "</span></p>\r\n";
 			}
 			pubshtml += "</div>\r\n";
 			add(pubshtml);

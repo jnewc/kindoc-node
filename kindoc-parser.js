@@ -3,7 +3,7 @@
 	var regex = {
 		func: /\/\*\*\s*([^\*]+)\*\*\/\s*(\w+):\s+function\(([\w, ]*)\)/gi,
 		kind: /\/\*\*\s*([^\*]+)\*\*\/\s*enyo\.kind/gi,
-		pubs: /published\s*:\s*\{\s+([^\{\}]+)\}/gi
+		pubs: /\/\/\s+@public\s+published\s*:\s*\{\s+([^\{\}]+)\}/gi
 	};
 
 	// Remove empty strings from an array.
@@ -63,11 +63,11 @@
 	// Creates a parser published object from a regex match
 	var parsePublished = function(match){
 		var propStrings = match[1].trim().split(/[ \t\r]+\n+[ \t]+/gi),
-			arr, props = [], item, i
+			arr, props = [], item= {}, i
 		;
 		for(i = 0; i < propStrings.length; i++){
 			arr = propStrings[i].split(/\s*:\s*/gi);
-			item = {};
+			
 			if(arr.length === 2){
 				item[arr[0]] = arr[1];
 			}
@@ -112,12 +112,14 @@
 				current.funcs.push(item);
 			}
 		}
+		c = 0;
+		iterate();
 		//Iterate through published and add to kinds.
 		while(m = regex.pubs.exec(source)) {
 			var obj = parsePublished(m);
 			if(obj){
 				// If index of function is past end of current kind, move to next.
-				if(next && m.index > next.index){
+				while(next && m.index > next.index){
 					iterate();
 				}
 				// else, if current is set to a kind, add function to kind.
