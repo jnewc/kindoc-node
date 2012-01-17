@@ -90,6 +90,13 @@
 			if(funcs){
 				var funchtml = "<h2>public functions</h2>";
 				Util.each(funcs, function(f, i){
+					Util.each(f.sections, function(sec, j) {
+						if(typeof f.sections[j] === "object") { f.sections[j] = f.sections[j].join("\n"); }
+						f.sections[j] = f.sections[j].replace(
+							/\s\[(\w+)\]\s/gi, 
+							" <span class=\"func-arg\">$1</span> "
+						);
+					});
 					funchtml += "<div class=\"func\">\r\n";
 					funchtml += "<h3>" + f.name + (f.args?" : <span>"+f.args+"</span>":"") + "</h3>\r\n";
 					funchtml += "<p>" + f.sections.join("<br />") + "</p>\r\n";

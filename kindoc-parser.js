@@ -12,6 +12,7 @@
 		for(i = 0; i < arr.length; i++){
 			if(arr[i].match(/^\s*$/)){
 				arr.splice(i, 1);
+				i--;
 			}
 		}
 		return arr;
@@ -99,17 +100,18 @@
 		while(m = regex.func.exec(source)) {
 			var item = parseFunc(m);
 			
+			
 			// If index of function is past end of current kind, move to next.
-			if(next && m.index > next.index){
+			while(next && m.index > next.index){ // Make sure kinds without functions are skipped over
 				iterate();
 			}
+			
 			// else, if current is set to a kind, add function to kind.
 			if(current){
 				if(current.funcs === undefined) { current.funcs = []; }
 				current.funcs.push(item);
 			}
 		}
-		
 		//Iterate through published and add to kinds.
 		while(m = regex.pubs.exec(source)) {
 			var obj = parsePublished(m);
