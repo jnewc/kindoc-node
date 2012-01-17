@@ -15,8 +15,10 @@
 enyo.kind({
 	name: "Arithmetic",
 	
+	// This will be added to the docs auto-magically. No need for comment!
 	published: {
-		pubprop: "someprop"
+		firstprop: "somedata",
+		secondprop: "moredata"
 	},
 	
 	/**
