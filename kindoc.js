@@ -36,6 +36,9 @@ Util.each(kinds, function(k, i){
 	// Parse functions
 	Html.constructFuncs(k.funcs);
 	
+	// Footer
+	Html.footer("", true);
+	
 });
 // [3]: Output 
 console.log(

@@ -52,12 +52,34 @@
 		};
 		this.header = function(title) {
 			this.tag("h1", { id: title }, title);
-			titles.push(title);
+			this.addTitle(title);
+		};
+		this.footer = function(content, doLink){
+			add(
+				"<div>" + 
+					content + 
+					"<div style=\"float:right;\">" +
+						(doLink ? 
+							"<a href=\"#top\">Back to top</a>" :
+							""
+						) +
+					"</div>" +
+				"</div>"
+			);
 		};
 		
 		
 		this.out = function(){
 			return str;
+		};
+		
+		this.addTitle = function(t){
+			titles.push(t);
+			titles.sort();
+		};
+		
+		this.getTitles = function(){
+			return titles;
 		};
 	
 		// -------------------- OTHER -------------------- //
@@ -122,7 +144,7 @@
 			var html = "<div class=\"menu\">";
 			if(!titles || titles.length === 0) { return null; }
 			Util.each(titles, function(t, i){
-				html += "<a href=\"#"+t+"\">"+t+"</a>";
+				html += "<a href=\"#"+t+"\">"+t+"</a><br />";
 			});
 			html += "</div>";
 			return html;
